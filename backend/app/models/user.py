@@ -1,0 +1,17 @@
+import string
+from sqlalchemy import Column, Integer, String 
+from sqlalchemy.orm import relationship 
+from backend.app.core.database import Base
+
+
+#this is class is to get a tasks user he have 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, nullable=False, index=True)
+    email = Column(String, unique=True, nullable=False, index=True)
+    hashed_password = Column(String, nullable=False)
+
+    tasks = relationship("Task", back_populates="owner", cascade="all, delete-orphan")
+     
