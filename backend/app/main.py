@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.api.routes.auth import router as auth_router
-from backend.app.api.routes.tasks import router as tasks_router
+from app.api.routes.auth import router as auth_router
+from app.api.routes.tasks import router as tasks_router
 from app.api.routes.assistant import router as assistant_router
-from backend.app.core.database import Base, engine
+from app.core.database import Base, engine
 
 app = FastAPI(title="Swibit Lab", version="1.0.0")
 

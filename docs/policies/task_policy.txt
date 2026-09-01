@@ -1,0 +1,70 @@
+SMART MANAGEMENT TASK POLICY
+
+1. Task Management
+
+Every task must have a clear title and description.
+Each task should have an assigned employee responsible for completing it.
+Tasks must have a defined status such as pending, in progress, or completed.
+Employees must update the task status as work progresses.
+
+2. Task Assignment
+
+Managers are responsible for assigning tasks to employees.
+A task should only be assigned to an employee who has the appropriate role or responsibility.
+Employees must not assign tasks to themselves or other employees unless they have the required permission.
+
+3. Task Updates
+
+Employees can update tasks that they are authorized to access.
+Important changes to a task should be recorded in the system.
+Completed tasks must be marked as completed after the required work has been finished.
+
+4. Employee Management
+
+Employee information must be accessible only to authorized users.
+Managers can manage employees according to their permissions.
+Employees should only access information required for their assigned responsibilities.
+
+5. User Roles and Permissions
+
+Administrators have full access to the system.
+Managers can manage employees and tasks according to their permissions.
+Regular employees can access and manage only the tasks assigned to them.
+Users must not perform actions outside their assigned permissions.
+
+6. Authentication
+
+Users must authenticate before accessing protected system resources.
+Passwords must never be stored as plain text.
+Authentication credentials must not be exposed in API responses or application logs.
+Unauthorized users must not be allowed to access protected resources.
+
+7. Data Protection
+
+User and task information must be protected from unauthorized access.
+Sensitive information must not be shared with unauthorized users.
+The system should return only the information that the authenticated user is authorized to access.
+
+8. Notifications
+
+Employees should receive notifications when a new task is assigned to them.
+Users should be notified about important changes related to their tasks.
+Managers should be able to monitor important task updates.
+
+9. Task Priorities
+
+Tasks may have different priority levels such as low, medium, high, and critical.
+High-priority tasks should be handled before lower-priority tasks when appropriate.
+Managers are responsible for setting or approving task priorities.
+
+10. System Usage
+
+The Smart Management Task system must be used only for legitimate management activities.
+Users must not attempt to bypass authentication or authorization mechanisms.
+Users must not access, modify, or delete information without the required permissions.
+
+11. Policy Compliance
+
+All users are responsible for following the Smart Management Task policies.
+Administrators are responsible for managing system access and permissions.
+Violations of these policies may result in restricted system access or administrative action.

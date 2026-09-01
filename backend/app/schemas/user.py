@@ -1,10 +1,8 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 
-
-#user out dont have a password so we dont seend a pass even a has pass to the cline
-class usercrate(BaseModel):
-    username: str 
+class UserCreate(BaseModel):
+    username: str
     email: EmailStr
     password: str
 
@@ -23,4 +21,3 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: Optional[str] = None
-    

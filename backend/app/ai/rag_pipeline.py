@@ -2,8 +2,6 @@ import json
 from app.ai.rag import retrieve
 from app.ai.generate import generate_response
 
-
-
 def ask_assistant(query: str) -> dict:
     retrieved_docs = retrieve(query)
     if not retrieved_docs:

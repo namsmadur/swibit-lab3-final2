@@ -1,27 +1,21 @@
-import os 
-from pathlib import Path 
+import os
+from pathlib import Path
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-#this code for path in the project root
-base_dir = Path(__file__).resolve().parent.parent 
-#root the project core app backend 
-env_path = base_dir / ".env" 
-load_dotenv(dotenv_path=env_path) 
+# ???? ???? ???? .env (?????? ?? ??????)
+ENV_PATH = Path(r"C:\Users\hp\Desktop\swibit-lab-v3\.env")
+load_dotenv(dotenv_path=ENV_PATH)
 
-#read the database url from the .env file
-database_url = os.getenv("DATABASE_URL")
-if not database_url:
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
     raise ValueError("DATABASE_URL is not set in the .env file")
 
-#create the database engine for the project 
-engine = create_engine(database_url)
-#create a configured "Session" class band engine 
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
-#create a base class for declarative class definitions for the code 
-Base = declarative_base() 
-#FUNCTION TO GET A DATABASE SESSION (used for dependency injection) its for setting up
+Base = declarative_base()
+
 def get_db():
     db = SessionLocal()
     try:

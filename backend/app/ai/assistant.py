@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from app.ai.agent import ask_assistant
+from app.ai.rag_pipeline import ask_assistant
 from backend.app.core.security import get_current_user
 from backend.app.models.user import User
 
 #it receives a request (a question) from the user 
 # checks the incomplete set, and calls Ask_assistant
-#  from agent.py  subsequently, it handles cases where an 
+#  from rag_pipeline  subsequently, it handles cases where an 
 # answer cannot be provided and manages the sources.
 router = APIRouter()
 
