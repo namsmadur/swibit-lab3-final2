@@ -1,36 +1,28 @@
-from fastapi import HTTPException, status
-from app.daos.task_dao import TaskDAO
+﻿from typing import Optional, List
+from sqlalchemy.orm import Session
+from app.models.task import Task
+from app.repositories.task_repository import TaskRepository
 from app.schemas.task import TaskCreate, TaskUpdate
 
 class TaskService:
-    def __init__(self, task_dao: TaskDAO):
-        self.task_dao = task_dao
+    def __init__(self, db: Session):
+        self.db = db
+        self.repo = TaskRepository()
 
-    def get_user_tasks(self, user_id: int):
-        return self.task_dao.get_by_user_id(user_id)
+    def create_task(self, user_id: int, task_data: TaskCreate):
+        data = task_data.dict()
+        data["user_id"] = user_id
+        return self.repo.create(self.db, data)
 
-    def create_task_for_user(self, task_data: TaskCreate, user_id: int):
-        return self.task_dao.create(
-            title=task_data.title,
-            description=task_data.description,
-            is_completed=task_data.is_completed or False,
-            user_id=user_id
-        )
+    def get_tasks(self, user_id: int) -> List[Task]:
+        return self.repo.get_by_user(self.db, user_id)
 
-    def update_task_for_user(self, task_id: int, task_data: TaskUpdate, user_id: int):
-        task = self.task_dao.get_by_id_and_user(task_id, user_id)
-        if not task:
-            raise HTTPException(404, "Task not found or you don't have permission")
-        return self.task_dao.update(
-            task=task,
-            title=task_data.title,
-            description=task_data.description,
-            is_completed=task_data.is_completed
-        )
+    def get_task(self, task_id: int):
+        return self.repo.get(self.db, task_id)
 
-    def delete_task_for_user(self, task_id: int, user_id: int):
-        task = self.task_dao.get_by_id_and_user(task_id, user_id)
-        if not task:
-            raise HTTPException(404, "Task not found or you don't have permission")
-        self.task_dao.delete(task)
-        return True
+    def update_task(self, task_id: int, task_data: TaskUpdate):
+        data = {k: v for k, v in task_data.dict().items() if v is not None}
+        return self.repo.update(self.db, task_id, data)
+
+    def delete_task(self, task_id: int):
+        return self.repo.delete(self.db, task_id)

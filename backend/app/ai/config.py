@@ -1,18 +1,13 @@
-import os
-from pathlib import Path
-from dotenv import load_dotenv
+﻿from pydantic_settings import BaseSettings
+from typing import Optional
 
-load_dotenv()
+class AISettings(BaseSettings):
+    LM_STUDIO_URL: str = "http://localhost:1234/v1"
+    LM_STUDIO_MODEL: str = "local-model"
+    LM_STUDIO_API_KEY: Optional[str] = None
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
-POLICIES_DIR = BASE_DIR / "docs" / "policies"
+    class Config:
+        env_file = ".env"
+        extra = "ignore"
 
-AI_PROVIDER = os.getenv("AI_PROVIDER", "openai")
-OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
-TOP_K_RESULTS = int(os.getenv("TOP_K_RESULTS", 3))
-CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", 500))
-CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", 50))
+ai_settings = AISettings()
