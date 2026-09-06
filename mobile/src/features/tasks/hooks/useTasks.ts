@@ -61,12 +61,12 @@ export const useDeleteTask = () => {
     },
     onSuccess: (data, variables) => {
       console.log(`✅ Delete successful for task ${variables}`);
-      // إزالة المهمة من الكاش
+      
       qc.setQueryData([TASKS_QUERY_KEY, "all"], (oldData: any) => {
         if (!oldData) return [];
         return oldData.filter((task: any) => task.id !== variables);
       });
-      // إبطال الاستعلامات
+      
       qc.invalidateQueries({ queryKey: [TASKS_QUERY_KEY] });
       Toast.show({ type: "success", text1: "Task deleted" });
     },

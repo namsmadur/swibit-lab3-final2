@@ -2,7 +2,7 @@ import { useLocalSearchParams, router } from "expo-router";
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import { useQuery } from "@tanstack/react-query";
-import { taskApi } from "../../../services/api"; // ✅ استيراد صحيح
+import { taskApi } from "../../../services/api"; 
 import { useUpdateTask } from "../../../features/tasks/hooks/useTasks";
 
 export default function TaskDetailScreen() {
@@ -14,7 +14,7 @@ export default function TaskDetailScreen() {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
 
-  // جلب بيانات المهمة
+  
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["task", taskId],
     queryFn: () => {

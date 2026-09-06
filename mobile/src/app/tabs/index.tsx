@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useTasks } from "../../features/tasks/hooks/useTasks";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 import { taskApi } from "../../services/api";
 
 export default function HomeScreen() {
@@ -175,7 +175,7 @@ export default function HomeScreen() {
             elevation: 6,
           }}
         >
-          <Text style={{ color: "#fff", fontSize: 16, fontWeight: "700" }}>+ Add New Task</Text>
+          <Text style={{ color: "#fff", fontSize: 16, fontWeight: "700" }}>➕ Add New Task</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={signOut} style={{ paddingVertical: 10, alignItems: "center" }}>
           <Text style={{ color: "#6b7280", fontSize: 14, fontWeight: "500" }}>🚪 Logout</Text>

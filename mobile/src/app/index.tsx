@@ -39,7 +39,7 @@ export default function LoginScreen() {
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 20 }}
         keyboardShouldPersistTaps="handled"
       >
-        {/* 🔹 بطاقة صغيرة وأنيقة */}
+        {/* 🔹 new card */}
         <View
           style={{
             backgroundColor: "#fff",

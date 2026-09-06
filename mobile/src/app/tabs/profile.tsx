@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 
 export default function ProfileScreen() {
   const { user, signOut } = useAuth();

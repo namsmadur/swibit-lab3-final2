@@ -1,5 +1,5 @@
-﻿import React, { createContext, useContext, useState, useEffect } from "react";
-import { getToken, setToken, removeToken } from "../services/api";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { getToken, setToken, removeToken } from "../../../services/api";
 import { router } from "expo-router";
 
 interface AuthContextType {
@@ -18,7 +18,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const loadUser = async () => {
       const token = await getToken();
-      console.log("🔑 [useAuth] Token from storage on load:", token ? "present" : "null");
+      console.log("?? [useAuth] Token from storage on load:", token ? "present" : "null");
       if (token) setUser({ token });
       setIsLoading(false);
     };
@@ -26,18 +26,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signIn = async (token: string) => {
-    console.log("🔑 [useAuth] signIn called");
+    console.log("?? [useAuth] signIn called");
     await setToken(token);
     setUser({ token });
-    console.log("✅ [useAuth] User set with token");
+    console.log("? [useAuth] User set with token");
   };
 
   const signOut = async () => {
-    console.log("🚪 [useAuth] signOut called");
+    console.log("?? [useAuth] signOut called");
     await removeToken();
     setUser(null);
-    console.log("✅ [useAuth] User cleared, token removed");
-    // توجيه المستخدم إلى شاشة تسجيل الدخول
+    console.log("? [useAuth] User cleared, token removed");
+    
     router.replace("/");
   };
 
@@ -53,3 +53,4 @@ export const useAuth = () => {
   if (!ctx) throw new Error("useAuth must be used within AuthProvider");
   return ctx;
 };
+
