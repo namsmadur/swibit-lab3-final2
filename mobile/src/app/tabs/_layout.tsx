@@ -1,8 +1,14 @@
-﻿import { Tabs } from "expo-router";
+﻿import { createBottomTabNavigator } from "expo-router/js-tabs";
+import HomeScreen from "../../screens/home/HomeScreen";
+import ProfileScreen from "../../screens/profile/ProfileScreen";
+import AIScreen from "../../screens/ai/AIScreen";
+
+const Tab = createBottomTabNavigator();
 
 export default function TabsLayout() {
+  console.log("🔥 TabsLayout rendered (using expo-router/js-tabs)");
   return (
-    <Tabs
+    <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: "#7c3aed",
         tabBarInactiveTintColor: "#9ca3af",
@@ -20,12 +26,11 @@ export default function TabsLayout() {
         },
         tabBarLabelStyle: { fontSize: 11, fontWeight: "600" },
         headerShown: false,
-        tabBarItemStyle: { borderRadius: 12 },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: "🏠 Home" }} />
-      <Tabs.Screen name="profile" options={{ title: "👤 Profile" }} />
-      <Tabs.Screen name="ai" options={{ title: "🤖 AI Chat" }} />
-    </Tabs>
+      <Tab.Screen name="Home" component={HomeScreen} options={{ title: "🏠 Home" }} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: "👤 Profile" }} />
+      <Tab.Screen name="AI" component={AIScreen} options={{ title: "🤖 AI Chat" }} />
+    </Tab.Navigator>
   );
 }

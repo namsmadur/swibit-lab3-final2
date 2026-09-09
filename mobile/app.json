@@ -1,4 +1,4 @@
-﻿{
+{
   "expo": {
     "name": "mobile",
     "slug": "mobile",
@@ -11,12 +11,26 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
-    "ios": { "supportsTablet": true },
-    "android": { "adaptiveIcon": { "foregroundImage": "./assets/adaptive-icon.png", "backgroundColor": "#ffffff" } },
-    "web": { "favicon": "./assets/favicon.png" },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
     "extra": {
       "apiUrl": "http://localhost:8000"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

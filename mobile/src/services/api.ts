@@ -3,6 +3,7 @@ import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
 
 const API_BASE_URL = Constants.expoConfig?.extra?.apiUrl || process.env.EXPO_PUBLIC_API_URL || "http://localhost:8000";
+console.log(`🌐 API_BASE_URL = ${API_BASE_URL}`);
 
 const storage = {
   getItem: async (key: string) => {
@@ -26,8 +27,9 @@ export const request = async <T>(url: string, options: RequestInit = {}): Promis
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
-  console.log(`📤 ${options.method || 'GET'} ${url}`);
-  const res = await fetch(`${API_BASE_URL}${url}`, { ...options, headers });
+  const fullUrl = `${API_BASE_URL}${url}`;
+  console.log(`📤 ${options.method || "GET"} ${fullUrl}`);
+  const res = await fetch(fullUrl, { ...options, headers });
   if (!res.ok) {
     const errData = await res.json().catch(() => ({}));
     console.error(`❌ Request failed: ${res.status}`, errData);
@@ -40,25 +42,14 @@ export const request = async <T>(url: string, options: RequestInit = {}): Promis
 
 export const taskApi = {
   getAll: (params?: { status?: string }) => {
-    console.log("📤 taskApi.getAll called with params:", params);
-    return request<any[]>("/api/v1/tasks" + (params?.status ? `?status=${params.status}` : ""));
+    const query = params?.status ? `?status=${params.status}` : "";
+    return request<any[]>("/api/v1/tasks" + query);
   },
-  getById: (id: number) => {
-    console.log("📤 taskApi.getById called for id:", id);
-    return request<any>(`/api/v1/tasks/${id}`);
-  },
-  create: (data: any) => {
-    console.log("📤 taskApi.create called with data:", data);
-    return request<any>("/api/v1/tasks", { method: "POST", body: JSON.stringify(data) });
-  },
-  update: (id: number, data: any) => {
-    console.log("📤 taskApi.update called for id:", id, "data:", data);
-    return request<any>(`/api/v1/tasks/${id}`, { method: "PUT", body: JSON.stringify(data) });
-  },
-  delete: (id: number) => {
-    console.log(`🗑️🔥 taskApi.delete called for id: ${id}`);
-    return request<any>(`/api/v1/tasks/${id}`, { method: "DELETE" });
-  },
+  getById: (id: number) => request<any>(`/api/v1/tasks/${id}`),
+  create: (data: any) => request<any>("/api/v1/tasks", { method: "POST", body: JSON.stringify(data) }),
+  update: (id: number, data: any) =>
+    request<any>(`/api/v1/tasks/${id}`, { method: "PUT", body: JSON.stringify(data) }),
+  delete: (id: number) => request<void>(`/api/v1/tasks/${id}`, { method: "DELETE" }),
 };
 
 export const { getItem: getToken, setItem: setToken, removeItem: removeToken } = storage;
